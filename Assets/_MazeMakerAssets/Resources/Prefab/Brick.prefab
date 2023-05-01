@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 4012213788616213}
   - component: {fileID: 33034472775896632}
   - component: {fileID: 23486336650771803}
-  m_Layer: 0
+  - component: {fileID: 3003602483601863938}
+  - component: {fileID: 8256772239183032034}
+  m_Layer: 31
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +85,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3003602483601863938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531101969777205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5532e49706695b4ba573f021de17f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &8256772239183032034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531101969777205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 1.0000004, z: 0.29989854}
+  m_Center: {x: 0, y: 0, z: 0.14994933}
