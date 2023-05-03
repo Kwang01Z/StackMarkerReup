@@ -38,9 +38,17 @@ public class Pivote : MonoBehaviour
             }
         }
     }
+    public bool IsFilled()
+    {
+        return m_IsFilled;
+    }
     public void SetCheck(bool a_Check)
     {
         m_IsChecked = a_Check;
+    }
+    public bool IsChecked()
+    {
+        return m_IsChecked;
     }
     public static Vector3 GetPosToStand(Pivote a_Pivote)
     {

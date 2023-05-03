@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
 	Pivote m_CurrentPivote;
 	bool m_IsSwiping;
 	Vector2 m_StartingTouch;
-	public float pivoteRadiusCheck;
+	public float pivoteRadiusCheck = 0.32f;
+	public int m_BrickCheckedCount = 0;
+	PlayerCollection m_PlayerCollection;
+	bool m_WinCollision;
     void Start()
     {
         m_CurrentPivote = m_OriginPosition;
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+		if (m_WinCollision) return;
         MoveToBrick();
 		InputUpdate();
 		CheckPivoteAuto();
@@ -34,6 +38,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, Pivote.GetPosToStand(m_CurrentPivote),m_Speed*Time.deltaTime);
     }
+	public int GetBrickCheckedCount()
+	{
+		return m_BrickCheckedCount;
+	}
     void SetPosition(Pivote a_Pivote)
     {
         Vector3 newPos = Pivote.GetPosToStand(a_Pivote);
@@ -46,13 +54,35 @@ public class PlayerController : MonoBehaviour
 		{
 			foreach (Collider collider in pivotes)
 			{
+				if (collider.gameObject.GetComponent<WinTrigger>())
+				{
+					m_WinCollision = true;
+				}
 				if (collider.gameObject.GetComponent<Pivote>())
 				{
 					Pivote pivote = collider.gameObject.GetComponent<Pivote>();
-					pivote.SetCheck(true);
+					if (!pivote.IsChecked())
+					{
+						pivote.SetCheck(true);
+						if (pivote.IsFilled())
+						{
+							m_BrickCheckedCount++;
+							m_PlayerCollection.SpawnBrick();
+						}
+						else
+						{
+							m_BrickCheckedCount--;
+							m_PlayerCollection.DespawnBrick();
+						}
+						Debug.Log(m_BrickCheckedCount);
+					}
 				}
 			}
 		}
+	}
+	public bool IsCollisionWin()
+	{
+		return m_WinCollision;
 	}
 	void InputUpdate()
 	{
@@ -171,6 +201,10 @@ public class PlayerController : MonoBehaviour
             SetNewBrick(m_CurrentPivote.GetCollionBrick(a_Dir));
         }
     }
+	public void SetPlayerCollection(PlayerCollection collection)
+	{
+		m_PlayerCollection = collection;
+	}
     private void OnDrawGizmosSelected()
     {
 		Gizmos.color = Color.red;
