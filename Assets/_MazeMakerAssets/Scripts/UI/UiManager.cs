@@ -6,8 +6,28 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] PlayerController m_PlayerController;
     [SerializeField] WinUI m_WinUI;
+    bool m_Checked;
+    private void Start()
+    {
+        m_WinUI.gameObject.SetActive(false);
+    }
     void Update()
     {
-        m_WinUI.gameObject.SetActive(m_PlayerController.IsCollisionWin());
+        WinUpload();
+    }
+    void WinUpload()
+    {
+        if (!m_PlayerController.IsCollisionWin()) return;
+        if (!m_Checked)
+        {
+            m_Checked = true;
+            m_PlayerController.GetPlayerAnim().TriggerWin();
+            StartCoroutine(OpenWinLayout());
+        }
+    }
+    IEnumerator OpenWinLayout()
+    {
+        yield return new WaitForSeconds(3);
+        m_WinUI.gameObject.SetActive(true);
     }
 }

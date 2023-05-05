@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 	bool m_IsSwiping;
 	Vector2 m_StartingTouch;
 	public float pivoteRadiusCheck = 0.32f;
-	public int m_BrickCheckedCount = 0;
+	int m_BrickCheckedCount = 0;
 	PlayerCollection m_PlayerCollection;
 	bool m_WinCollision;
     void Start()
@@ -204,6 +204,10 @@ public class PlayerController : MonoBehaviour
 	public void SetPlayerCollection(PlayerCollection collection)
 	{
 		m_PlayerCollection = collection;
+	}
+	public PlayerAnim GetPlayerAnim()
+	{
+		return m_PlayerAnim;
 	}
     private void OnDrawGizmosSelected()
     {

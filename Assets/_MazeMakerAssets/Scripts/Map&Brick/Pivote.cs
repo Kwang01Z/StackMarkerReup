@@ -22,6 +22,7 @@ public class Pivote : MonoBehaviour
     }
     private void Start()
     {
+        if(m_Brick!=null)
         m_IsFilled = m_Brick.gameObject.activeInHierarchy;
     }
     private void Update()
