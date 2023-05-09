@@ -18,4 +18,8 @@ public class PlayerAnim : MonoBehaviour
     {
         m_PlayerAnim.SetTrigger("jump");
     }
+    public void TriggerIdle()
+    {
+        m_PlayerAnim.SetTrigger("idle");
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Pivote m_OriginPosition;
+    [SerializeField] MapManager m_MapManager;
     [SerializeField] PlayerAnim m_PlayerAnim;
 	[SerializeField] float m_Speed;
 	Pivote m_CurrentPivote;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	bool m_WinCollision;
     void Start()
     {
-        m_CurrentPivote = m_OriginPosition;
+		m_CurrentPivote = m_MapManager.GetPivoteOrigin();
         SetPosition(m_CurrentPivote);
     }
     void Update()
@@ -209,7 +209,27 @@ public class PlayerController : MonoBehaviour
 	{
 		return m_PlayerAnim;
 	}
-    private void OnDrawGizmosSelected()
+	public void ChangeNextMap()
+	{
+		m_MapManager.ChangeNextMap();
+		m_CurrentPivote = m_MapManager.GetPivoteOrigin();
+		SetPosition(m_CurrentPivote);
+	}
+	public void SetWin(bool a_isWin)
+	{
+		m_WinCollision = a_isWin;
+	}
+	public void ResetGame()
+	{
+		m_PlayerAnim.TriggerIdle();
+		for (int i = m_BrickCheckedCount; i > 1; i--)
+		{
+			m_BrickCheckedCount--;
+			m_PlayerCollection.DespawnBrick();
+		}
+		SetWin(false);
+	}
+	private void OnDrawGizmosSelected()
     {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, pivoteRadiusCheck);

@@ -30,4 +30,12 @@ public class UiManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         m_WinUI.gameObject.SetActive(true);
     }
+    public void ChangeNextMap()
+    {
+        m_PlayerController.ResetGame();
+        m_PlayerController.ChangeNextMap();
+        m_WinUI.gameObject.SetActive(false);
+        m_Checked = false;
+        
+    }
 }

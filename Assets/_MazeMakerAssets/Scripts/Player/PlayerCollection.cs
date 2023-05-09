@@ -39,4 +39,5 @@ public class PlayerCollection : MonoBehaviour
         brickClone.SetActive(false);
         m_SpawnBricks.Push(brickClone);
     }
+   
 }
